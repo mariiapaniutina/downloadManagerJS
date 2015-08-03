@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Downloader Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="styles/style.css"/>
+    </head>
+    <body onload="loadMe()">
+    
+        <div class="wrapper"><!--START [wrapper]-->
+            <div class="header">Download Manager</div>
+            
+            <div class="content"><!--START [content]-->
+                <div class="list_wrapper"><!--START [list_wrapper]-->
+                    <div class="list_header">Files to download</div>
+                    <div class="list_row list_row_header">
+                        <div class="icon_wrapper"></div>
+                        <div class="filename">File Name</div>
+                        <div class="progress_wrapper">Progress</div>
+                    </div>
+                    
+                    <div id="download_list"></div>
+
+                    <div class="list_row row_new_item" id="add_new_wrapper">
+                        <div class="icon_wrapper"><div class="icon"></div></div>   
+                        <div class="filename">
+                            <div class="custom_file_input">
+                                <div class="file_data" id="file_data" style="color: #c1c0c0;">File name to add</div>
+                                <input type="file" id="new_item_text" />
+                            </div>
+                        </div>
+                        <div class="progress_wrapper">
+                            <button id="addNewItem" class="custom_bttn">Add item</button>
+                        </div>
+                    </div>
+                </div><!--END [list_wrapper]-->
+
+                <div class="row_download_all">
+                    <button id="download" class="custom_bttn">Download All</button>
+                </div>
+
+            </div><!--END [content]-->
+        </div><!--END [wrapper]-->
+    
+        <script type="text/javascript">
+            function loadMe (){
+                var downloaderContainer = document.getElementById('download_list');
+                var new_item = document.querySelector( '#new_item_text' );
+                var custom_input = document.getElementById('file_data');
+                
+                //custom input functionality
+                new_item.addEventListener('change', function(){
+                    var text = new_item.value;
+                    if (text !== '') {
+                        if (text.length >20){
+                            text = text.slice(0, 20);
+                            text+='...';
+                        }
+                        custom_input.style.color = '#42739e';
+                        custom_input.innerHTML = text;
+                    }
+                })
+                
+                //adding new item functionality
+                document.getElementById('addNewItem').addEventListener( 'click', function(e) {
+                    e.preventDefault();
+                    if (new_item.value !== ''){
+                        new_item.value = '';
+                    
+                        downloaderContainer.innerHTML += '<div class="list_row">'+
+                            '<div class="icon_wrapper"><div class="icon"></div></div>'+
+                            '<div class="filename">'+custom_input.innerHTML+'</div>'+
+                            '<div class="progress_wrapper">'+'<div class="progress"><div class="fill"></div></div>'+'</div>'+
+                            '<button class="remove_item"></button>'+
+                            '</div>';    
+
+                        custom_input.innerHTML = 'File name to add';
+                        custom_input.style.color = '#c1c0c0';
+                    }
+                    
+                    //remove item functionality
+                    var demoList = document.getElementsByClassName('remove_item');
+                    for (var i=0; i<demoList.length; i++){
+                        demoList[i].addEventListener('click', function(e){
+                            e.preventDefault();
+                            this.parentNode.remove();
+                        }, false);
+                    }
+                  
+                });
+                                
+                //download functionality
+                document.getElementById('download').addEventListener('click', function(){
+                    var progressList = document.getElementsByClassName('progress');
+                    var fillers = document.getElementsByClassName('fill');
+                    
+                    if (progressList.length !== 0){
+                        //hide "add item" and "remove"
+                        document.getElementById('new_item_text').setAttribute('disabled', 'disabled');
+                        var removeBttnList = document.getElementsByClassName('remove_item');
+                        for (var k=0; k<removeBttnList.length; k++){
+                            removeBttnList[k].setAttribute('disabled', 'disabled');
+                        }
+                                        
+                        //add identificatiors
+                        for (var j=0; j<fillers.length; j++){
+                            fillers[j].setAttribute("id",'progress_bar_'+j);
+                        }
+                    
+                        //progress bar animation
+                        function transitionAnim (id){
+                            if (document.getElementById('progress_bar_'+id) !== null){
+                                document.getElementById('progress_bar_'+id).style.width='100%';
+                            
+                                document.getElementById('progress_bar_'+id).addEventListener('transitionend', function(){
+                                    document.getElementById('progress_bar_'+id).className ='progress_filled';
+                                    document.getElementById('progress_bar_'+id).removeAttribute('id');
+                                    if (id+1 < document.getElementsByClassName('fill').length || document.getElementsByClassName('fill').length !== 0){
+                                        transitionAnim (id+1);
+                                    } else {
+                                        document.getElementById('new_item_text').removeAttribute('disabled');
+                                        var removeBttnList = document.getElementsByClassName('remove_item');
+                                        for (var k=0; k<removeBttnList.length; k++){
+                                            removeBttnList[k].removeAttribute('disabled');
+                                        }
+                                    }
+                                });
+                            } else {
+                                document.getElementById('new_item_text').removeAttribute('disabled');
+                            }
+                            
+                        };
+                    
+                        //add animation to every progress bar
+                        transitionAnim(0);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

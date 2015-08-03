@@ -1,0 +1,147 @@
+/* Main layers */
+html {}
+body {padding: 0px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    height: 100%;}
+.wrapper {width: 980px;
+    color: #555;
+    margin: 0px auto;}
+
+h3 {margin: 0px;
+    padding: 0px 0px 20px 0px;}
+h3#all_done {margin-top: 20px;
+    text-align: center;
+    color: #0088cc;
+    margin-bottom: 0px;
+    padding: 0px;}
+.display_none {display: none !important;}
+
+/*==============================================================================
+    HEADER
+==============================================================================*/
+div.header {height: 70px;
+    background-color: #39495f;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 70px;
+    padding: 0px 50px;}
+
+/*==============================================================================
+    CONTENT
+==============================================================================*/
+div.content { background-color: #e4e5ea;
+    padding: 50px 50px 0px 50px;}
+
+div.list_wrapper {border: 1px solid #d8d9de;
+    background-color: #fefefe;
+    border-radius: 3px;}
+div.list_header {height: 65px;
+    padding: 0px 25px;
+    border-bottom: 1px solid #d8d9de;
+    font-size: 26px;
+    color: #545358;
+    line-height: 65px;
+    font-weight: 900;}
+div.list_row {overflow: hidden;
+    height: 100px;}
+div.list_row:nth-child(2n+1) {background-color: #f8f8f8;}
+div.list_row div.icon_wrapper {width: 60px;
+    padding: 0px 20px;
+    float: left;
+    height: 100%;}
+div.list_row div.icon_wrapper div.icon {height: 64px;
+    width: 60px;
+    margin-top: 18px;
+    background: url('../images/icon-sprite.png') 0px -400px no-repeat;}
+div.list_row div.filename {width: 260px;
+    padding-right: 20px;
+    float: left;
+    font-size: 22px;
+    line-height: 100px;
+    height: 100%;}
+div.list_row div.progress_wrapper {float: left;
+    width: 380px;
+    height: 100%;
+    font-size: 22px;
+    line-height: 100px;}
+
+div.list_row_header {height: 70px;}
+div.list_row_header div.filename,
+div.list_row_header div.progress_wrapper {line-height: 70px;
+    font-weight: bold;}
+
+div.row_new_item {background-color: #f8f8f8;
+    border: 1px dashed #bebebe;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    position: relative;}
+div.row_new_item div.icon_wrapper div.icon {background: url('../images/icon-sprite.png') 0px -600px no-repeat;}
+
+div.row_download_all {height: 100px;
+    overflow: hidden;
+    padding-left: 382px;}
+
+.progress {width: 380px;
+    height: 25px;
+    float: left;
+    border-radius: 3px;
+    background-color: #e2e2e2;
+    margin-top: 38px;}
+.fill {background-color: #26bf8c;
+    width: 0%;
+    height: 25px;
+    transition: 500ms linear;
+    border-radius: 3px;}
+.progress_filled {background-color: #26bf8c;
+    width: 100%;
+    height: 25px;
+    border-radius: 3px;}
+
+div.custom_file_input {position: relative;}
+div.custom_file_input div.file_data {font-size: 18px;
+    line-height: 38px;
+    border-radius: 3px;
+    height: 38px;
+    position: absolute;
+    top: 30px;
+    border: 1px solid #8992a5;
+    width: 250px;
+    padding: 0px 5px;
+    color: #42739e;}
+div.custom_file_input input[type=file] {opacity: 0;
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 30px;}
+
+button.custom_bttn {background-color: #42739e;
+    border: 0 none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-size: 18px;
+    height: 38px;
+    line-height: 20px;
+    margin-top: 30px;
+    padding: 0 45px;}
+button.custom_bttn:hover,
+button.custom_bttn:active {background-color: #4b7fad;}
+
+button.remove_item {background: url("../images/icon-sprite.png") no-repeat scroll 0 -200px;
+    border: 0 none;
+    float: left;
+    height: 23px;
+    margin-left: 48px;
+    margin-top: 39px;
+    width: 23px;
+    cursor: pointer;}
+
+div.row_download_all button.custom_bttn {background-color: #26bf8c;}
+div.row_download_all button.custom_bttn:hover,
+div.row_download_all button.custom_bttn:active { background-color: #29d59c;}
+
+
